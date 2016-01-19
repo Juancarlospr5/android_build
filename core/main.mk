@@ -302,7 +302,7 @@ endif
 
 # Add build properties for ART. These define system properties used by installd
 # to pass flags to dex2oat.
-ADDITIONAL_BUILD_PROPERTIES += persist.sys.dalvik.vm.lib.2=libart
+ADDITIONAL_BUILD_PROPERTIES += persist.sys.dalvik.vm.lib.2=libart.so
 ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.isa.$(TARGET_ARCH).variant=$(DEX2OAT_TARGET_CPU_VARIANT)
 ifneq ($(DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES),)
   ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.isa.$(TARGET_ARCH).features=$(DEX2OAT_TARGET_INSTRUCTION_SET_FEATURES)
@@ -475,7 +475,12 @@ endif
 ifneq ($(ONE_SHOT_MAKEFILE),)
 # We've probably been invoked by the "mm" shell function
 # with a subdirectory's makefile.
+
+# No Makefiles to include if we are performing a mms/short-circuit build. Only
+# the targets mentioned by main.mk and tasks/* are built (kernel, boot.img etc)
+ifneq ($(ONE_SHOT_MAKEFILE),__none__)
 include $(ONE_SHOT_MAKEFILE)
+endif
 # Change CUSTOM_MODULES to include only modules that were
 # defined by this makefile; this will install all of those
 # modules as a side-effect.  Do this after including ONE_SHOT_MAKEFILE
