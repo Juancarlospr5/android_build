@@ -21,7 +21,6 @@
 # core_tiny.mk in addition to core_minimal.mk.
 
 PRODUCT_PACKAGES += \
-    BasicDreams \
     Browser \
     Calendar \
     CalendarProvider \
@@ -31,7 +30,6 @@ PRODUCT_PACKAGES += \
     DeskClock \
     DocumentsUI \
     DownloadProviderUi \
-    Email \
     ExactCalculator \
     ExternalStorageProvider \
     FusedLocation \
@@ -40,12 +38,10 @@ PRODUCT_PACKAGES += \
     Keyguard \
     Launcher2 \
     ManagedProvisioning \
-    PicoTts \
     PacProcessor \
     libpac \
     PrintSpooler \
     ProxyHandler \
-    QuickSearchBox \
     Settings \
     SharedStorageBackup \
     Telecom \
