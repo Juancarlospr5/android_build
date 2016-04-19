@@ -68,17 +68,24 @@ $(combo_2nd_arch_prefix)TARGET_STRIP := $($(combo_2nd_arch_prefix)TARGET_TOOLS_P
 
 $(combo_2nd_arch_prefix)TARGET_NO_UNDEFINED_LDFLAGS := -Wl,--no-undefined
 
-$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    -O2 \
+#Arsenic Optimizations
+include $(BUILD_SYSTEM)/arsenicopti.mk
+
+$(combo_2nd_arch_prefix)TARGET_arm_CFLAGS :=    $(ARSENIC_GCC_CFLAGS_ARM) \
                         -fomit-frame-pointer \
                         -fstrict-aliasing    \
                         -funswitch-loops
 
 # Modules can choose to compile some source as thumb.
 ifeq ($(STRICT_ALIASING),true)
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -Os -fomit-frame-pointer
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb $(ARSENIC_GCC_CFLAGS_THUMB) -fomit-frame-pointer
 else
-$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb -Os -fomit-frame-pointer -fno-strict-aliasing
+$(combo_2nd_arch_prefix)TARGET_thumb_CFLAGS := -mthumb $(ARSENIC_GCC_CFLAGS_THUMB) -fomit-frame-pointer -fno-strict-aliasing
 endif
+
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += $(ARSENIC_GCC_CFLAGS)
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += $(ARSENIC_GCC_CPPFLAGS)
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += $(ARSENIC_GCC_LDFLAGS) 
 
 # Set FORCE_ARM_DEBUGGING to "true" in your buildspec.mk
 # or in your environment to force a full arm build, even for
@@ -149,7 +156,6 @@ $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
 # More flags/options can be added here
 $(combo_2nd_arch_prefix)TARGET_RELEASE_CFLAGS := \
 			-DNDEBUG \
-			-g \
 			-Wstrict-aliasing=2 \
 			-fgcse-after-reload \
 			-frerun-cse-after-loop \

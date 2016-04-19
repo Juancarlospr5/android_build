@@ -122,10 +122,17 @@ TARGET_GLOBAL_LDFLAGS += -Wl,--allow-shlib-undefined
 
 TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
 
+# Arsenic optimizations
+include $(BUILD_SYSTEM)/arsenicopti.mk
+
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += $(ARSENIC_GCC_CFLAGS)
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += $(ARSENIC_GCC_CPPFLAGS)
+$(combo_2nd_arch_prefix)TARGET_GLOBAL_LDFLAGS += $(ARSENIC_GCC_LDFLAGS)
+
 # More flags/options can be added here
 TARGET_RELEASE_CFLAGS := \
 			-DNDEBUG \
-			-O2 -g \
+			$(ARSENIC_GCC_CFLAGS_ARM) \
 			-Wstrict-aliasing=2 \
 			-fgcse-after-reload \
 			-frerun-cse-after-loop \

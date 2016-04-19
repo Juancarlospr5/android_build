@@ -954,6 +954,9 @@ else
         build/target/product/security/cm-devkey
 endif
 
+# Arsenic Optimizaciones
+include $(BUILD_SYSTEM)/arsenicopti.mk
+
 # Generate a file containing the keys that will be read by the
 # recovery binary.
 RECOVERY_INSTALL_OTA_KEYS := \
