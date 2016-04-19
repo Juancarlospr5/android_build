@@ -955,7 +955,7 @@ else
 endif
 
 # Arsenic Optimizaciones
-include $(BUILD_SYSTEM)/arsenicopti.mk
+include $(BUILD_SYSTEM)/arsenic_opti.mk
 
 # Generate a file containing the keys that will be read by the
 # recovery binary.

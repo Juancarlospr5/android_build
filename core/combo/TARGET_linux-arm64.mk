@@ -123,7 +123,7 @@ TARGET_GLOBAL_LDFLAGS += -Wl,--allow-shlib-undefined
 TARGET_GLOBAL_CPPFLAGS += -fvisibility-inlines-hidden
 
 # Arsenic optimizations
-include $(BUILD_SYSTEM)/arsenicopti.mk
+include $(BUILD_SYSTEM)/arsenic_opti.mk
 
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CFLAGS += $(ARSENIC_GCC_CFLAGS)
 $(combo_2nd_arch_prefix)TARGET_GLOBAL_CPPFLAGS += $(ARSENIC_GCC_CPPFLAGS)

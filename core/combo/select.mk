@@ -27,7 +27,7 @@ combo_os_arch := $($(combo_target)OS)-$($(combo_target)$(combo_2nd_arch_prefix)A
 combo_var_prefix := $(combo_2nd_arch_prefix)$(combo_target)
 
 # Arsenic optimizations
-include $(BUILD_SYSTEM)/arsenicopti.mk
+include $(BUILD_SYSTEM)/arsenic_opti.mk
 
 # Set reasonable defaults for the various variables
 
